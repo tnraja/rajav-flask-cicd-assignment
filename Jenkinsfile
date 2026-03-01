@@ -11,6 +11,21 @@ pipeline {
 
 				sh './bin/pip3 install -r requirements.txt'
 			}
+			stage('Test') {
+    			steps {
+        			sh '''
+            			. venv/bin/activate
+            			pip install pytest pytest-timeout
+            			pytest tests/ --junitxml=test-results.xml -v --timeout=30
+        			'''
+    		}
+    post {
+        always {
+            junit 'test-results/*.xml'
+        }
+    }
+}
+
 		}
 		stage('deploy') {
 			steps {	
