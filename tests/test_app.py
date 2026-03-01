@@ -1,5 +1,9 @@
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import pytest
-from src.app import app
+from app import app  # Fixed import!
 
 @pytest.fixture
 def client():
