@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main', 
-                    url: 'https://github.com/tnraja/rajav-flask-cicd-assignment.git
+                    url: 'https://github.com/tnraja/rajav-flask-cicd-assignment.git’
             }
         }
         
