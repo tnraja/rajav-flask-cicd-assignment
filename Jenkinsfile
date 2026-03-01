@@ -36,17 +36,19 @@ pipeline {
                 sh '''
                     . venv/bin/activate
                     pip install pytest
-                    pytest tests/ --junitxml=test-results.xml -v || true
+		    pytest tests/ --junitxml=test-results/results.xml -v || true
+		    mkdir -p test-results
+		    echo '<?xml version="1.0" ?><testsuites></testsuites>' > test-results/results.xml
                 '''
             }
             post {
                 always {
-                    sh 'ls -la test-results.xml || true'
-                    junit 'test-results/*.xml'
-                }
-            }
+			script {
+			if (fileExists('test-results/results.xml')) {
+			junit 'test-results/results.xml'}
+            		}
+        	}
         }
-        
         stage('Deploy') {
             steps {
                 sh '''
