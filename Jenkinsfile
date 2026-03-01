@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main', 
-                    url: 'https://github.com/YOURUSERNAME/raja-flask-cicd-assignment.git'
+                    url: 'https://github.com/tnraja/rajav-flask-cicd-assignment.git
             }
         }
         
@@ -58,7 +58,7 @@ pipeline {
     post {
         success {
             emailext (
-                to: 'your-email@gmail.com',
+                to: 'tn69raja@gmail.com',
                 subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: "Pipeline passed! ${env.BUILD_URL}",
                 mimeType: 'text/html'
@@ -66,7 +66,7 @@ pipeline {
         }
         failure {
             emailext (
-                to: 'your-email@gmail.com',
+                to: 'tn69raja@gmail.com',
                 subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: "Pipeline failed! ${env.BUILD_URL}",
                 mimeType: 'text/html'
